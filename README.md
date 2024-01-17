@@ -1,6 +1,6 @@
-Le projet: Bataille navale
+# Le projet: Bataille navale
 
-Membre de l'equipe:
+# Membre de l'equipe:
 
 - EL FEJER Marwa  		22209199
 
@@ -10,11 +10,11 @@ Membre de l'equipe:
 
 - KOTIN Mahudo Narcisse 	22211719
 
-Les librairies seront indispensables pour les tests.
+# Les librairies seront indispensables pour les tests.
 
-Les sources java de la librairie sont toutes dans le répertoire src, et les sources des tests dans le répertoire src/navaletests.
+# Les sources java de la librairie sont toutes dans le répertoire src, et les sources des tests dans le répertoire src/navaletests.
 
-Une fois à la racine du projet, Exécuter les commandes suivantes:
+# Une fois à la racine du projet, Exécuter les commandes suivantes:
 
 - "ant runConsol" pour lancer le programme sur le terminal
 
@@ -32,7 +32,7 @@ Une fois à la racine du projet, Exécuter les commandes suivantes:
 
 - "ant init" pour creer les dossiers bin, doc et dist
 
-Les librairies externes utilisées sont:
+# Les librairies externes utilisées sont:
 
 -junit-4.12.jar
 
