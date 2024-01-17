@@ -38,7 +38,8 @@
 -hamcrest-core-1.3.jar
 
 **DEMO**
-[battleship.webm](https://github.com/mkotin/battleship_school_project_unicaen/assets/56112591/f81ceb71-c4e1-4f88-a1d8-08a57d92a0e9)
+
+https://github.com/mkotin/battleship_school_project_unicaen/assets/56112591/dd450824-3fa0-4762-82a8-8672c63d5c39
 
 
 
