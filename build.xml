@@ -1,0 +1,81 @@
+<project name="BatailNaval" default="compile" basedir=".">
+	<property name="projet.sources.dir" value="src"/>
+	<property name="projet.bin.dir" value="bin"/>
+	<property name="projet.lib.dir" value="lib"/>
+	<property name="projet.doc.dir" value="doc"/>
+	<property name="projet.dist.dir" value="dist"/>
+	<path id="projet.classpath">
+		<fileset dir="${projet.lib.dir}">
+			<include name="*.jar"/>
+		</fileset>
+		<pathelement location="${projet.bin.dir}"/>
+	</path>
+	<target name="compile" description="Compilation des classes" depends="init">
+		<javac srcdir="${projet.sources.dir}" destdir="${projet.bin.dir}" debug="on" optimize="off" deprecation="on" includeantruntime="false">
+			<classpath refid="projet.classpath"/>
+		</javac>
+	</target>
+	<target name="init">
+		<echo message="Initialisation du projet"/>
+		<delete dir="${basedir}/${projet.bin.dir}"/>
+		<mkdir dir="${basedir}/${projet.bin.dir}"/>
+		<delete dir="${basedir}/${projet.doc.dir}"/>
+		<mkdir dir="${basedir}/${projet.doc.dir}"/>
+		<delete dir="${basedir}/${projet.dist.dir}"/>
+		<mkdir dir="${basedir}/${projet.dist.dir}"/>
+	</target>
+	<target name="runInterface" description="execution" depends="compile">
+		<java classname="Main" fork="true">
+			<classpath refid="projet.classpath"/>
+		</java>
+	</target>
+	<target name="runConsol" description="execution" depends="compile">
+		<java classname="model.Demo" fork="true">
+			<classpath refid="projet.classpath"/>
+		</java>
+	</target>
+	<target name="packaging" depends="compile">
+		<mkdir dir="${projet.bin.dir}/META-INF" />
+        <mkdir dir="dist"/>
+        <manifest file="${projet.bin.dir}/META-INF/MANIFEST.MF">
+            <attribute name="Class-Path" value="." />
+        	<attribute name="Main-Class" value="Main" />
+            <attribute name="Built-By" value="jacquier_diallo_sow_el-fejer_kotin"/>
+        </manifest>
+		<jar jarfile="${projet.dist.dir}/battleship.jar" basedir="${projet.bin.dir}" manifest="${projet.bin.dir}/META-INF/MANIFEST.MF">
+			<zipgroupfileset dir="${projet.lib.dir}" includes="*.jar"/>
+		</jar>
+	</target>
+	<target name="javadoc" description="génération de la doc java">
+		<javadoc sourcepath="src" destdir="doc">
+			<fileset dir="src" defaultexcludes="yes">
+				<include name="**"/>
+			</fileset>
+			<classpath>
+		        <fileset dir="${projet.lib.dir}">
+		            <include name="*.jar"/>
+		        </fileset>
+		    </classpath>
+		</javadoc>
+	</target>
+	<target name="clean" description="nettoyage du projet">
+		<delete dir="${basedir}/${projet.bin.dir}"/>
+		<delete dir="${basedir}/${projet.doc.dir}"/>
+		<delete dir="${basedir}/${projet.dist.dir}"/>
+	</target>
+	<target name="test" depends="compile" description="Teste du projet">
+        	<junit printsummary="true" haltonerror="no" haltonfailure="no" showoutput="true">
+            <classpath refid="projet.classpath"/>
+            <formatter type="plain"/>
+		<test fork="true" name="navaletests.TestRandomPlayer" outfile="TestRandomPlayer" />
+		<test fork="true" name="navaletests.TestHmainPlayer" outfile="TestHmainPlayer" />
+		<test fork="true" name="navaletests.TestAbstractPlayer" outfile="TestAbstractPlayer" />
+		<test fork="true" name="navaletests.TestCellule" outfile="TestCellule" />
+		<test fork="true" name="navaletests.TestGrid" outfile="TestGrid" />
+		<test fork="true" name="navaletests.TestPosition" outfile="TestPosition" />
+		<test fork="true" name="navaletests.TestShip" outfile="TestShip" />
+		<test fork="true" name="navaletests.TestGame" outfile="TestGame" />
+		<test fork="true" name="navaletests.TestDimension" outfile="TestDimension" />
+	</junit>
+    </target>
+</project>
